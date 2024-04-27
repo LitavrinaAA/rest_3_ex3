@@ -7,7 +7,7 @@ import ru.litavrina.sem3_ex3.domain.User;
 import java.util.ArrayList;
 import java.util.List;
 @Repository
-public class UserRepository {
+public class UserRepository implements iUserRepository  {
     private  List<User>  userList = new ArrayList<>();
 
     public List<User> getUserList() {
@@ -17,9 +17,11 @@ public class UserRepository {
     public void setUserList(List<User> userList) {
         this.userList = userList;
     }
-//private final JdbcTemplate jdbc;
-//
-//    public UserRepository(JdbcTemplate jdbc) {
-//        this.jdbc = jdbc;
-//    }
+
+    @Override
+    public User saveUser(User user) {
+        userList.add(user);
+        return user;
+    }
+
 }

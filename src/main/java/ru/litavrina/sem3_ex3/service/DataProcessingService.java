@@ -1,9 +1,12 @@
 package ru.litavrina.sem3_ex3.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.litavrina.sem3_ex3.domain.User;
 import ru.litavrina.sem3_ex3.repository.UserRepository;
+import ru.litavrina.sem3_ex3.repository.UserRepositoryH2;
+import ru.litavrina.sem3_ex3.repository.iUserRepository;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,9 +15,10 @@ import java.util.stream.Collectors;
 @Service
 public class DataProcessingService {
     @Autowired
-    private UserRepository repository;
+    @Qualifier("UserRepositoryH2")
+    private iUserRepository repository;
 
-    public UserRepository getRepository() {
+    public iUserRepository getRepository() {
         return repository;
     }
     public void  addUserToList(User user)
@@ -22,9 +26,6 @@ public class DataProcessingService {
         repository.getUserList().add(user);
     }
     public List<User> sortUsersByAge(List<User> users) {
-
-//        return repository.getUsers().stream().sorted(Comparator.comparing(User::getAge))
-//                .collect(Collectors.toList());
 
 
         return users.stream()
